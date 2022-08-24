@@ -1,85 +1,57 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
-#include <stdio.h>
-//int main()
-//{
-//	int w = 0;
-//	scanf("%d", &w);
-//	return 0;
-//}
+#include "game.h"
+void menu()
+{
+	printf("********************\n");
+	printf("****  1. play  *****\n");
+	printf("****  0. exit  *****\n");
+	printf("********************\n");
+}
+void game()
+{
+	//雷的信息存储
+	//1.布置好的雷的信息
+	char mine[ROWS][COLS] = { 0 };
+	//2.排查出的雷的信息
+	char show[ROWS][COLS] = { 0 };
+	//初始化
+	InitBoard(mine, ROWS, COLS,'0');
+	InitBoard(show, ROWS, COLS,'*');
+	//打印棋盘
+	//DisplayBoard(mine, ROW, COL);
+	DisplayBoard(show, ROW, COL);
+	//布置雷
+	SetMine(mine, ROW, COL);
+	//扫雷
+	FindMine(mine, show, ROW, COL);
 
-//int main()
-//{
-//	int a = 1;
-//	int b = a >> 1;
-//	printf("%d", b);
-//	return 0;
-//}
-
-//int main()
-//{
-//	int a = 3;
-//	int b = 5;
-//	int c = a ^ b;
-//	printf("%d\n", c);
-//	return 0;
-//}
-//
-//int main()
-//{
-//	int a = 3;
-//	int b = 5;
-//	printf("%d%d", a, b);
-//	a = a ^ b;
-//	b = a ^ b;
-//	a = a ^ b;
-//	printf("%d%d", a, b);
-//	return 0;
-//}
-
-//int main()
-//{
-//	int num = 0;
-//	scanf("%d", &num);
-//	int count = 0;//计数
-//	while (num)
-//	{
-//		if (num % 2 == 1)
-//			count++;
-//		num = num / 2;
-//	}
-//	printf("二进制中1的个数=%d\n", count);
-//	return 0;
-//}
-//
-//int main()
-//{
-//	int num = 0;
-//	scanf("%d", &num);
-//	int count = 0;
-//	int i;
-//	for (i = 0; i < 32; i++)
-//	{
-//		if (1 == ((num >> i) & 1))
-//		{
-//			count++;
-//		}
-//	}
-//	printf("二进制中1的个数=%d", count);
-//	return 0;
-//}
-
+}
+void test()
+{
+	int input = 0;
+	srand((unsigned int)time(NULL));
+	do
+	{
+		menu();
+		printf("请选择:>");
+			scanf("%d", &input);
+		switch (input)
+		{
+		case 1:
+			game();
+			break;
+		case 0:
+			printf("退出游戏\n");
+			break;
+		default:
+			printf("选择错误，重新选择！\n");
+			break;
+		}
+	} while (input);
+}
 int main()
 {
-	int num = 0;
-	scanf("%d", &num);
-	int i = 0;
-	int count = 0;
-	while (num)
-	{
-		count++;
-		num = num & (num - 1);
-	}
-	printf("%d", count);
+	test();
 	return 0;
 }
